@@ -2,29 +2,34 @@
 % Please edit documentation in R/clean_addresses.R
 \name{clean_addresses}
 \alias{clean_addresses}
-\title{Clean and fix address text}
+\title{This function cleans address text and tries to guess the NYC borough.
+Clean and fix address text}
 \usage{
 clean_addresses(df, address_col = "address", borough_col = "borough")
 }
 \arguments{
-\item{df}{A data frame with an address column.}
+\item{df}{A data.frame (or tibble) containing an address column.}
 
-\item{address_col}{The name of the column with addresses.}
+\item{address_col}{The name of the address column (string). Default: "address".}
 
-\item{borough_col}{The name of the new borough column.}
+\item{borough_col}{Optional name for output borough column. Default: "borough".}
 }
 \value{
-A data frame with a cleaned address and borough column.
+A data.frame with a cleaned address column and uppercase borough name (if found).
 }
 \description{
-Removes extra spaces and commas from addresses,
-makes all letters uppercase, and adds a borough name if it can
-find one in the text.
+Cleans messy address text by removing commas, spacing, and fixing
+abbreviations like "ST" → "STREET". Also detects the borough name
+and returns it in uppercase.
 }
 \examples{
 \dontrun{
-library(dplyr)
-tibble(address = c("123 Main St, Brooklyn, NY", "55 E 10th St New York NY")) |>
-  clean_addresses()
+library(tibble)
+df <- tibble(address = c(
+  "123 Main St, Brooklyn, NY",
+  "55 E 10th St NEW YORK NY",
+  "789 staten island ny"
+))
+clean_addresses(df)
 }
 }

@@ -12,7 +12,8 @@
 #' df2 <- data.frame(tract_id = 1:2, income_2020 = c(60000, 65000))
 #' merge_census_years(df1, df2, id_col = "tract_id")
 #' }
-#' @import dplyr purrr
+#' @import dplyr
+#' @importFrom purrr reduce
 #' @export
 merge_census_years <- function(..., id_col = "tract_id") {
   dfs <- list(...)
