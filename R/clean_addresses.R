@@ -1,3 +1,4 @@
+utils::globalVariables(c(":=", "povrate", "medinc", "ownerocc"))
 # This function cleans address text and tries to guess the NYC borough.
 
 #' Clean and fix address text
