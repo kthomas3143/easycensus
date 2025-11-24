@@ -2,25 +2,24 @@
 % Please edit documentation in R/clean_addresses.R
 \name{clean_addresses}
 \alias{clean_addresses}
-\title{This function cleans address text and tries to guess the NYC borough.
-Clean and fix address text}
+\title{Clean and fix address text}
 \usage{
 clean_addresses(df, address_col = "address", borough_col = "borough")
 }
 \arguments{
-\item{df}{A data.frame (or tibble) containing an address column.}
+\item{df}{A data.frame or tibble containing an address column.}
 
 \item{address_col}{The name of the address column (string). Default: "address".}
 
 \item{borough_col}{Optional name for output borough column. Default: "borough".}
 }
 \value{
-A data.frame with a cleaned address column and uppercase borough name (if found).
+A cleaned data.frame with standardized address text and a borough column.
 }
 \description{
-Cleans messy address text by removing commas, spacing, and fixing
-abbreviations like "ST" → "STREET". Also detects the borough name
-and returns it in uppercase.
+Cleans messy address text by removing commas, spacing, fixing
+abbreviations, expanding single-letter directions (N → NORTH),
+removing ordinal number suffixes (38TH → 38), and detecting boroughs.
 }
 \examples{
 \dontrun{
@@ -28,8 +27,9 @@ library(tibble)
 df <- tibble(address = c(
   "123 Main St, Brooklyn, NY",
   "55 E 10th St NEW YORK NY",
-  "789 staten island ny"
+  "37 N 38th St Queens NY"
 ))
 clean_addresses(df)
 }
+
 }
