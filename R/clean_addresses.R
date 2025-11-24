@@ -38,11 +38,10 @@ clean_addresses <- function(df, address_col = "address", borough_col = "borough"
       !!address_sym := stringr::str_replace_all(!!address_sym, ",", ""),
       !!address_sym := stringr::str_to_upper(!!address_sym),
 
-      # Remove ordinal suffixes: 38TH → 38, 3RD → 3, 12ND → 12, 21ST → 21
       !!address_sym := stringr::str_replace_all(
         !!address_sym,
-        "\\b([0-9]+)(ST|ND|RD|TH)\\b",
-        "\\1"
+        "(?<=\\d)(ST|ND|RD|TH)(?=\\b)",
+        ""
       ),
 
       # Expand common street abbreviations
